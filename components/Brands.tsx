@@ -2,9 +2,14 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 
-const brandImages = [
+interface BrandImage {
+  src: string
+  href: string
+}
+
+const brandImages: BrandImage[] = [
   {
     src: '/assets/img/brands/brand-1.png',
     href: "",
@@ -27,7 +32,7 @@ const brandImages = [
   },
 ]
 
-const brandContainerVariant = {
+const brandContainerVariant: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -41,17 +46,17 @@ const brandContainerVariant = {
   }
 }
 
-const brandItem = {
+const brandItem: Variants = {
   hidden: {
     y: 20,
     opacity: 0,
   },
   show: {
-    y: 0, // أضيفت هذه القيمة
+    y: 0,
     opacity: 1,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.6, 0.3, 0.8],
+      ease: "easeOut" // تم تغيير مصفوفة الأرقام إلى قيمة معتمدة
     }
   }
 }
@@ -67,24 +72,23 @@ const Brands = () => {
           viewport={{once: false, amount: 0.3}}
           className='grid grid-cols-2 lg:grid-cols-5 py-8' 
         >
-          {brandImages.map((img, index) => {
-            return (
-              <motion.div 
-                variants={brandItem}
-                key={index}
-              >
-                <Link href={img.href} className='group'>
-                  <Image
-                    className='opacity-50 hover:opacity-100 transition-all mx-auto' 
-                    src={img.src} 
-                    width={204} 
-                    height={106} 
-                    alt={`Brand ${index + 1}`} 
-                  />
-                </Link>
-              </motion.div>
-            )
-          })}
+          {brandImages.map((img, index) => (
+            <motion.div 
+              variants={brandItem}
+              key={index}
+            >
+              <Link href={img.href} className='group'>
+                <Image
+                  className='opacity-50 hover:opacity-100 transition-all mx-auto' 
+                  src={img.src} 
+                  width={204} 
+                  height={106} 
+                  alt={`Brand ${index + 1}`}
+                  priority={index < 3} // تحسين أداء تحميل الصور
+                />
+              </Link>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
