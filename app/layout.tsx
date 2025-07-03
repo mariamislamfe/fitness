@@ -3,6 +3,7 @@ import { Oswald, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+<html lang="en" className="no-zoom"></html>
 
 const oswald = Oswald({
   variable: "--oswald",

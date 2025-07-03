@@ -12,6 +12,12 @@
   --font-oswald: 'Oswald', sans-serif; 
 }
 
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -56,4 +62,17 @@ h1, h2, h3, h4, h5, h6 {
 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
  .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
   @apply bg-red-700
+}
+
+@layer utilities {
+  .no-zoom {
+    text-size-adjust: none;
+    touch-action: manipulation;
+  }
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
