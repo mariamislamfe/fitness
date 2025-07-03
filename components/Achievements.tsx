@@ -3,10 +3,9 @@
 import CountUp from 'react-countup';
 import { FaBriefcase, FaClock, FaTrophy } from 'react-icons/fa';
 import { ImUsers } from 'react-icons/im';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { useRef } from 'react';
 
-// تعريف نوع البيانات
 interface StatItem {
   number: number;
   icon: React.ComponentType<{ className?: string }>;
@@ -36,24 +35,27 @@ const stats: StatItem[] = [
   },
 ];
 
-const statsContainerVariant = {
+const statsContainerVariant: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
       staggerChildren: 0.4,
       duration: 0.5,
-      ease: "linear",
+      ease: "linear", // تم التصحيح هنا
     }
   }
 };
 
-const statsItem = {
+const statsItem: Variants = {
   hidden: { y: 20, opacity: 0 },
   show: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.6, 0.3, 0.8] }
+    transition: { 
+      duration: 0.5, 
+      ease: "easeOut" // تم التصحيح هنا (بدلاً من مصفوفة الأرقام)
+    }
   }
 };
 
