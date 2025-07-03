@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-roboto: 'Roboto', sans-serif; 
+  --font-oswald: 'Oswald', sans-serif; 
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:var(--font-roboto);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-oswald);
+}
+
+.h1{
+  @apply text-white text-7xl lg:text-[128px] tracking-[-3px];
+}
+
+.h2 {
+  @apply text-[36px];
+}
+.h3 {
+  @apply text-[32px];
+}
+.h4 {
+  @apply text-[26px];
+}
+.h5 {
+  @apply text-[22px];
+}
+
+.active {
+  @apply text-red-700
+}
+
+
+/* swipper pagination */
+
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+ .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  @apply bg-red-700
+}
