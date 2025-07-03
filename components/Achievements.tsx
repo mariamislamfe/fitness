@@ -1,64 +1,75 @@
 'use client'
 
 import CountUp from 'react-countup';
-import {FaBriefcase, FaClock, FaTrophy} from 'react-icons/fa'
-import {ImUsers} from 'react-icons/im'
-import {motion, useInView} from 'framer-motion'
-import {useRef} from 'react'
+import { FaBriefcase, FaClock, FaTrophy } from 'react-icons/fa';
+import { ImUsers } from 'react-icons/im';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
-const stats = [
-    {
-        number: 19,
-        icon: FaBriefcase,
-        text: 'training courses',
-    },
-    {
-        number: 879,
-        icon: FaClock,
-        text: 'working hours',
-    },
-    {
-        number: 150,
-        icon: ImUsers,
-        text: 'happy customers',
-    },
-    {
-        number: 9,
-        icon: FaTrophy,
-        text: 'international awards',
-    },
-]
+// تعريف نوع البيانات
+interface StatItem {
+  number: number;
+  icon: React.ComponentType<{ className?: string }>;
+  text: string;
+}
+
+const stats: StatItem[] = [
+  {
+    number: 19,
+    icon: FaBriefcase,
+    text: 'training courses',
+  },
+  {
+    number: 879,
+    icon: FaClock,
+    text: 'working hours',
+  },
+  {
+    number: 150,
+    icon: ImUsers,
+    text: 'happy customers',
+  },
+  {
+    number: 9,
+    icon: FaTrophy,
+    text: 'international awards',
+  },
+];
 
 const statsContainerVariant = {
-    hidden: {opacity: 0},
-    show: {
-        opacity: 1,
-        transition:{
-            staggerChildren:0.4,
-            duration: 0.5,
-            ease: "linear", 
-        }
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.4,
+      duration: 0.5,
+      ease: "linear",
     }
-}
+  }
+};
 
 const statsItem = {
-    hidden: {y:20, opacity: 0},
-    show: {y:0, opacity: 1, transition:{duration: 0.5, ease: [0.25, 0.6, 0.3, 0.8]}}
-}
+  hidden: { y: 20, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5, ease: [0.25, 0.6, 0.3, 0.8] }
+  }
+};
 
-const StatItem = ({item}) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, {once: true});
-  
+const StatItem = ({ item }: { item: StatItem }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <motion.div 
+    <motion.div
       variants={statsItem}
       className="flex flex-col items-center p-6 bg-white/10 rounded-lg"
     >
       <div className='border border-red-700/90 w-[140px] h-[140px] mx-auto rounded-full p-1 mb-6'>
         <div ref={ref} className='border border-red-700/30 w-full h-full flex items-center justify-center text-5xl rounded-full'>
           {isInView && (
-            <CountUp 
+            <CountUp
               start={0}
               end={item.number}
               duration={6}
@@ -71,19 +82,19 @@ const StatItem = ({item}) => {
         <h4 className="h4 font-bold uppercase">{item.text}</h4>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 const Achievements = () => {
   return (
-    <section>
-      <div className="container mx-auto">
+    <section className="py-16">
+      <div className="container mx-auto px-4">
         <motion.div
           variants={statsContainerVariant}
-          initial='hidden'
-          whileInView={'show'}
-          viewport={{once: false, amount: 0.3}}
-          className="grid grid-cols-2 md:grid-cols-4 gap-16"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           {stats.map((item, index) => (
             <StatItem key={index} item={item} />
@@ -91,7 +102,7 @@ const Achievements = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Achievements
+export default Achievements;
